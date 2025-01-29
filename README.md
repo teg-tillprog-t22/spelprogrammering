@@ -2,7 +2,8 @@
 
 ## Programstruktur
 
-### Huvudloopen
+### Spelloopen (game loop)
+
 
 ```python
 # Funktion som representerar en spelomgång
@@ -28,7 +29,7 @@ Mellan varje varv i huvudloopen, dvs en frame, så kör vi kommandot
 
 ```python
 while running:
-    dt = pygame.clock.tick(FPS)
+    dt = clock.tick(FPS)
 ```
 
 `FPS` (frames per sekund) är en konstant som vi definierar till att vara *maximal* framerate för spelet. 60 frames per sekund är en lämplig uppdateringsfrekvens som överenstämmer med många skärmars uppdateringshastighet.
@@ -53,9 +54,40 @@ Funktionen ```pygame.event.get()``` tar alla objekt som ligger i kön och return
             running = False
 ```
 
+#### 3. Uppdatera rörelser och spellogik och rita spelvärlden
 
+För att göra koden lätt att förstå och underhålla är målsättningen att göra koden modulär. Det vill säga att dela upp den i olika snuttar med ansvar för specifika delar av spellogiken.
 
+Att ha en tydlig indelning av spelloopen är ett sätt. Att bryta ut funktionalitet till funktioner ett annat. Inom objektorienterad programmering samlas både data (variabler eller attribut) och funktionalitet (funktioner eller metoder). 
 
+I ett fiktivt spel har vi en spelare, `player`, en lista med godis, `candies`, och en lista med fiender, `enemies`. Om de är implementerade som klasser kan varje klass ha en metod `update` och en metod `draw`. Då förenklas motsvarande delar i huvudloopen till (ungefär):
 
-#### 3. Uppdatera rörelser och spellogik 
+```python
+        # Uppdatera rörelser och spellogik
+        keys = pygame.key.get_pressed()
+        player.update(keys)
+        for enemy in enemeies:
+            enemy.update(player)
+        for candy in candies:
+            candy.update()
 
+        # Rita ut spelvärlden
+        player.draw(screen)
+        for enemy in enemeies:
+            enemy.draw(screen)
+        for candy in candies:
+            candy.draw(screen)
+```
+
+Fördelen är att (nästan) all logik ligger i klasserna. (Nästan) samma huvudloop skulle gå att använda till många olika typer av spel.
+
+#### 4. Flippa till den nya bilden
+
+Pygame använder något som används i många grafiska system: *double buffering*. Det innebär att vi ritar upp spelet på en osynlig yta (*back buffer*), och när allt är färdigt så byter vi ut den mot den synliga ytan (*front buffer*). Bytet går mycket snabbt och förhindrar att spelaren ser hur bilden stegvis byggs upp och ger ett jämnare intryck.
+
+I Pygame görs detta med:
+
+```python
+        # Flippa till den nya bilden
+        pygame.display.flip()
+```
