@@ -4,7 +4,6 @@
 
 ### Spelloopen (game loop)
 
-
 ```python
 # Funktion som representerar en spelomgång
 def play():
@@ -83,7 +82,7 @@ Fördelen är att (nästan) all logik ligger i klasserna. (Nästan) samma huvudl
 
 #### 4. Flippa till den nya bilden
 
-Pygame använder något som används i många grafiska system: *double buffering*. Det innebär att vi ritar upp spelet på en osynlig yta (*back buffer*), och när allt är färdigt så byter vi ut den mot den synliga ytan (*front buffer*). Bytet går mycket snabbt och förhindrar att spelaren ser hur bilden stegvis byggs upp och ger ett jämnare intryck.
+Pygame använder *double buffering* för att rita till skäörmen. Det innebär att vi ritar upp spelet på en osynlig yta (*back buffer*). När allt är färdigt så byter vi ut den mot den synliga ytan (*front buffer*). Själva bytet går mycket snabbt och gör att grafiken ser jämnare ut.
 
 I Pygame görs detta med:
 
