@@ -126,8 +126,8 @@ class Candy:
         # Godiset agerar olika beroende på tillstånd
         match self.state:
             case Candy.State.ACTIVE:
-                # Godis kan inte röra på sig
-                pass
+                if now > self.death_time:
+                    self.state = Candy.State.DEAD                    
             
             case Candy.State.DYING:
                 # Om det har gått 2 sekunder så dö fullständigt
