@@ -45,19 +45,16 @@ class Candy:
     def is_active(self):
         return self.state == CandyState.ACTIVE
 
-# Skapa en spelare och flytta hen
-player1 = Player("Micke")
-player1.move(5, -2) # Förflyttar 5 steg i x och -2 steg i y
-print(f"{player1.name} har position ({player1.x}, {player1.y}) och poäng {player1.score}.")
+# Huvudfunktionen
+def main():
+    # Skapa en spelare och några godisar
+    player = Player("Micke")
+    candies = [Candy("röd"), Candy("blå"), Candy("grön")]
 
-# Skapa en godis och ät den
-candy1 = Candy("röd")
-print(f"Är godisbiten aktiv? {candy1.is_active()}")
-candy1.eat()
-print(f"Är godisbiten aktiv? {candy1.is_active()}")
+    # Simulate the player moving and eating candies:
+    player.move(2, 3)
+    for candy in candies:
+        player.eat_candy(candy)
 
-# Tests interaktionen mellan spelare och godis
-player1 = Player("Micke")
-candy1 = Candy("röd")
-player1.eat_candy(candy1)
-player1.eat_candy(candy1)
+if __name__ == '__main__':
+    main()
