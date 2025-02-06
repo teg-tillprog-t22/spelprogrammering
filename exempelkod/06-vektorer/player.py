@@ -10,11 +10,9 @@ class Player:
         '''
         Initialisera spelarens attribut med startvärden 
         '''
-        self.x = width//2
-        self.y = height//2
+        self.position = pygame.Vector2(width//2, height//2)
+        self.velocity = pygame.Vector2(3, 0)
         self.size = 20      # Storlek i pixlar
-        self.direction = 0  # Riktning i radianer
-        self.speed = 3      # Hastighet i pixlar per fram
         self.points = 0
         self.width = width
         self.height = height
@@ -27,29 +25,23 @@ class Player:
         # Piltangenterna används för att förändra spelarens
         # riktining med 1/100 varv
         if keys[pygame.K_LEFT]:
-            self.direction -= 2*pi/100
+            self.velocity.rotate_ip(-5)
         if keys[pygame.K_RIGHT]:
-            self.direction += 2*pi/100
+            self.velocity.rotate_ip(5)
 
         # Beräkna nya x från förflyttningen
-        # med hjälp av lite trigonometri 
-        self.x += self.speed*cos(self.direction)
-        self.y += self.speed*sin(self.direction)
+        self.position += self.velocity
 
         # Kontrollera om de nya koordinaterna går utanför kanten
         # på skärmen
 
         # x-led
-        if self.x > self.width-self.size or self.x < self.size:
-            # Utgångsvinkeln är pi - ingångsvinkeln vid kollision på sidorna
-            # Rita på papper för att övertyga dig om att detta är sant
-            self.direction = pi - self.direction
+        if self.position.x > self.width-self.size or self.position.x < self.size:
+            self.velocity.reflect_ip(pygame.Vector2(1,0))
 
         # y-led
-        if self.y > self.height-self.size or self.y < self.size:
-            # Utgångsvinkeln är -ingångsvinkeln vid kollision uppåt/nedåt
-            # Rita på papper för att övertyga dig om att detta är sant
-            self.direction = -self.direction
+        if self.position.y > self.height-self.size or self.position.y < self.size:
+            self.velocity.reflect_ip(pygame.Vector2(0,1))
 
     def draw(self, screen):
         '''
@@ -57,17 +49,15 @@ class Player:
         '''
         now = pygame.time.get_ticks()
         # Rita spelarens kropp som en cirkel
-        pygame.draw.circle(screen, "yellow", (self.x, self.y), self.size)
+        pygame.draw.circle(screen, "yellow", self.position, self.size)
         # Och lägg till ett streck från origo till cirkelns
         # kant för att visa riktningen
-        x1 = self.x + self.size*cos(self.direction)
-        y1 = self.y + self.size*sin(self.direction)
-        pygame.draw.line(screen, "black", (self.x, self.y), (x1,y1), 2)
+        endpos = self.position + self.velocity.normalize()*self.size
+        pygame.draw.line(screen, "black", self.position, endpos, 2)
 
     def get_rect(self):
         '''Returnerar spelarens hit box'''
-        return pygame.Rect(
-            self.x-self.size, self.y-self.size, self.size*2, self.size*2)
+        return pygame.Rect(self.position-(self.size, self.size), (self.size*2, self.size*2)) 
 
     def check_collisions(self, candies):
         '''
