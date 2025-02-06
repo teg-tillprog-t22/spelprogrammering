@@ -14,6 +14,16 @@ class Player:
         self.x += dx
         self.y += dy
 
+    # En metod som interagerar med godisobjektet
+    def eat_candy(self, candy):
+        if candy.is_active():
+            candy.eat()         # Godiset hanterar sitt eget tillstånd
+            self.score += 100   # Öka poängen
+            print(f"{self.name} har nu {self.score} poäng.")
+        else:
+            print(f"{self.name} hittade ingen godis att äta.")
+
+
 # Skapa en enum för godisets tillstånd
 class CandyState(Enum):
     ACTIVE = 1
@@ -45,3 +55,9 @@ candy1 = Candy("röd")
 print(f"Är godisbiten aktiv? {candy1.is_active()}")
 candy1.eat()
 print(f"Är godisbiten aktiv? {candy1.is_active()}")
+
+# Tests interaktionen mellan spelare och godis
+player1 = Player("Micke")
+candy1 = Candy("röd")
+player1.eat_candy(candy1)
+player1.eat_candy(candy1)
