@@ -67,20 +67,13 @@ def main():
         player.check_collisions(candies)
 
         # - Städa upp döda objekt
-        alive_candies = []
-        for candy in candies:
-            if candy.is_alive():
-                alive_candies.append(candy)
-        candies = alive_candies
+        candies = [candy for candy in candies if candy.is_alive()]
 
         # - Skapa nya objekt
         # Logiken hade kunnat vara på många sätt
         # men här skapar vi tre i taget så fort
         # ingen längre är aktiv
-        num_active = 0
-        for candy in candies:
-            if candy.is_active():
-                num_active = num_active + 1
+        num_active = sum(candy.is_active() for candy in candies)
         if num_active==0:
            for i in range(3):
                 candies.append(create_random_candy())
