@@ -1,6 +1,8 @@
 ## TillProg Spelprogrammering VT25
 [⬅️ Gå tillbaka till startsidan](../../README.md)
 
+[👾 Gå till koden](main.py)
+
 ### Kollisioner och objektets livscykel
 
 I detta exempel visar vi hur man kan hantera kollisioner mellan spelare och andra objekt (t.ex. godisar) i ett Pygame-baserat spel. Vi fokuserar på följande aspekter:

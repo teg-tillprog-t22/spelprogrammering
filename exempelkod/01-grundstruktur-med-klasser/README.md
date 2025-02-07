@@ -1,6 +1,8 @@
 ## TillProg Spelprogrammering VT25
 [⬅️ Gå tillbaka till startsidan](../../README.md)
 
+[👾 Gå till koden](main.py)
+
 ### Grundstruktur för spelloopen (game loop)
 
 För att hålla god ordning i koden så kan de olika uppgifter som skall göras till att börja med sorteras in i ett antal breda kategorier.

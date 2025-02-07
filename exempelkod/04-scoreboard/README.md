@@ -1,6 +1,8 @@
 ## TillProg Spelprogrammering VT25
 [⬅️ Gå tillbaka till startsidan](../../README.md)
 
+[👾 Gå till koden](main.py)
+
 ### Enkel scoreboard-hantering med text
 
 I det här exemplet lägger vi till en **poängräkning** (scoreboard) i spelet, så att spelaren kan se hur många poäng hen har samlat ihop genom att äta godisar. För att göra detta använder vi Pygames **font-modul** och renderar text direkt på skärmen.

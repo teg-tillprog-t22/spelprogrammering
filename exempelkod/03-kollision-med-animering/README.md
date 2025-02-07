@@ -1,6 +1,8 @@
 ## TillProg Spelprogrammering VT25
 [⬅️ Gå tillbaka till startsidan](../../README.md)
 
+[👾 Gå till koden](main.py)
+
 ### Enkel animering och `enum`-baserade tillstånd
 
 I detta exempel utökar vi vårt spel med **enkel animering** när ett objekt (ett “godis”) håller på att försvinna (DYING). Vi använder en **enum** för att skilja på olika tillstånd, så att både logik och ritning beror på om godiset är **ACTIVE**, **DYING** eller **DEAD**.
