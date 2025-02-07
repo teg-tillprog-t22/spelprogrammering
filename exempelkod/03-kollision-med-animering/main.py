@@ -249,20 +249,20 @@ def main():
         player.check_collisions(candies)
 
         # - Städa upp döda objekt
-        alive_candies = []
-        for candy in candies:
-            if candy.is_alive():
-                alive_candies.append(candy)
-        candies = alive_candies
+        # Här övergår vi till att använda
+        # list comprehensions för att på ett effektivt
+        # och mer "pythonic" sätt städa bort döda objekt.
+        # Det går att använda samma loop som i tidigare
+        # exempek. Slutresultatet blir detsamma
+        candies = [c for c in candies if c.is_alive()]
 
         # - Skapa nya objekt
         # Logiken hade kunnat vara på många sätt
         # men här skapar vi tre i taget så fort
-        # ingen längre är aktiv
-        num_active = 0
-        for candy in candies:
-            if candy.is_active():
-                num_active = num_active + 1
+        # ingen längre är aktiv.
+        # För att räkna antalet aktiva godisar så
+        # utnyttjar vi Python-knepet att True räknas som 1
+        num_active = sum(c.is_active() for c in candies)
         if num_active==0:
            for i in range(3):
                 candies.append(create_random_candy())
