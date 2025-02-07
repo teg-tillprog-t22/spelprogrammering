@@ -7,3 +7,5 @@ I det här repot finns dels exempelkod som dels följer lektionerna och dels utv
 I några av mapparna med exempelkod finns ytterligare anteckningar:
 
 * [Grundstruktur för spelloopen](exempelkod/01-grundstruktur-med-klasser/README.md)
+* [Enkla kollisioner](exempelkod/02-enkla-kollisioner/README.md)
+
