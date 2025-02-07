@@ -59,6 +59,8 @@ def main():
 
         # Rita ut spelvärlden
         screen.fill("black")
+        # Rita marken
+        pygame.draw.rect(screen, "green", (0,HEIGHT-50,WIDTH,50))
         player.draw(screen)
 
         # Rita ut poängen på skärmen
