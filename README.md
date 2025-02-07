@@ -10,4 +10,5 @@ I några av mapparna med exempelkod finns ytterligare anteckningar:
 2. [Enkla kollisioner](exempelkod/02-enkla-kollisioner/README.md)
 3. [Kollision med animering](exempelkod/03-kollision-med-animering/README.md)
 4. [Scoreboard](exempelkod/04-scoreboard/README.md)
+5. [Klasser och objektorientering](exempelkod/05-klasser/README.md)
 
