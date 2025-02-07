@@ -8,4 +8,5 @@ I några av mapparna med exempelkod finns ytterligare anteckningar:
 
 * [Grundstruktur för spelloopen](exempelkod/01-grundstruktur-med-klasser/README.md)
 * [Enkla kollisioner](exempelkod/02-enkla-kollisioner/README.md)
+* [Kollision med animering](exempelkod/03-kollision-med-animering/README.md)
 
