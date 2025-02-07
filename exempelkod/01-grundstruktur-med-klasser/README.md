@@ -1,5 +1,5 @@
 ## TillProg Spelprogrammering VT25
-[Gå till till startsidan](../../README.md)
+[⬅️ Gå tillbaka till startsidan](../../README.md)
 
 ### Grundstruktur för spelloopen (game loop)
 
