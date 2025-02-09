@@ -13,10 +13,10 @@ FPS = 60
 # FUNKTIONER
 
 def main():
-    '''
+    """
     Spelets huvudfunktion.
     Motsvarar en spelomgång i vårt spel.
-    '''
+    """
 
     # Intialisera pygame och font-modulen
     pygame.init()
@@ -31,7 +31,10 @@ def main():
     font = pygame.font.Font(None, 36)
 
     # Initialisera spelvärlden
-    player = Player(WIDTH,HEIGHT)
+    bounds = screen.get_rect()
+    # Anpassa spelarens rörelseområde till skärmen minus marknivån
+    bounds.bottom -= 50
+    player = Player(bounds)
     
     running = True
     while running:
@@ -59,11 +62,14 @@ def main():
 
         # Rita ut spelvärlden
         screen.fill("black")
-        # Rita marken
+        
+        # - Rita marken
         pygame.draw.rect(screen, "green", (0,HEIGHT-50,WIDTH,50))
+        
+        # - Rita spelaren
         player.draw(screen)
 
-        # Rita ut poängen på skärmen
+        # - Rita ut poängen på skärmen
         text = f"Score: {player.points}"
         text_surface = font.render(text, True, "white")  
         screen.blit(text_surface, (10, 10))  # Top-left corner        
