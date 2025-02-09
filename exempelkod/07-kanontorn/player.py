@@ -102,15 +102,11 @@ class Player:
             draw_top_right=True,
         )
 
-        # Rita pipan som en polygon som vi roterar till rätt vinkel
-        points = [
-            self.position + pygame.Vector2(40, 5).rotate(self.angle),
-            self.position + pygame.Vector2(40, -5).rotate(self.angle),
-            self.position + pygame.Vector2(70, -5).rotate(self.angle),
-            self.position + pygame.Vector2(70, 5).rotate(self.angle),
-        ]
-        pygame.draw.polygon(screen, "blue", points)
-
+        # Rita pipan som en linje
+        cannon_start = self.position + pygame.Vector2.from_polar((40, self.angle))
+        cannon_end = self.position + pygame.Vector2.from_polar((70, self.angle))
+        pygame.draw.line(screen, "blue", cannon_start, cannon_end, 10)
+        
         # Rita ut skotten
         for bullet in self.bullets:
             bullet.draw(screen)
@@ -124,4 +120,3 @@ class Player:
     def check_collisions(self, candies):
         """Kontrollerar om spelaren kolliderar med andra objekt
         och sköter logiken för vad som händer vid kollisioner."""
-ß
