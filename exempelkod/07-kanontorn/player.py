@@ -13,31 +13,29 @@ class Bullet:
         self.state = Bullet.ALIVE
 
     def update(self):
-        """ Uppdatera skottets position """
+        """Uppdatera skottets position."""
         self.position += self.velocity
         if not self.bounds.collidepoint(self.position):
             self.die()
 
     def die(self):
-        """ "Döda" skottet """
+        """Döda skottet."""
         self.state = Bullet.DEAD
 
     def is_alive(self):
-        """ False om skottet ska tas bort, annars True """
+        """False om skottet ska tas bort, annars True."""
         return self.state == Bullet.ALIVE
 
     def draw(self, screen):
-        """ Rita ut skottet på skärmen """
+        """Rita ut skottet på skärmen."""
         pygame.draw.circle(screen, "white", self.position, self.size)
 
 
 class Player:
-    """
-    Representerar spelaren
-    """
+    """Representerar spelaren."""
 
     def __init__(self, bounds):
-        """ Skapa en spelare """
+        """Skapa en spelare."""
         # Initialisera spelarens attribut med startvärden
         # Utseende
         self.color = "yellow"
@@ -58,10 +56,8 @@ class Player:
         self.last_shot = 0
 
     def update(self, keys):
-        """
-        Uppdatera spelarens position och tillstånd.
-        Reagera på knapptryckningar.
-        """
+        """Uppdatera spelarens position och tillstånd.
+        Reagera på knapptryckningar."""
         # Rörelse
         self.angle += self.speed
         if self.angle > 350 or self.angle < 190:
@@ -80,19 +76,21 @@ class Player:
         self.bullets = [bullet for bullet in self.bullets if bullet.is_alive()]
 
     def shoot(self):
-        """ Skjut ett skott! """
+        """Skjut ett skott!"""
         now = pygame.time.get_ticks()
         if now - self.last_shot > self.fire_delay:
             self.last_shot = now
             # Skottets position är spelarens position + kanonens längd
-            bullet_position = self.position + pygame.Vector2.from_polar((self.cannon_size, self.angle))
+            bullet_position = self.position + pygame.Vector2.from_polar(
+                (self.cannon_size, self.angle)
+            )
             bullet_velocity = pygame.Vector2.from_polar((self.bullet_speed, self.angle))
             # Skapa ett nytt skott och lägg till det i listan
             bullet = Bullet(self.bounds, bullet_position, bullet_velocity)
             self.bullets.append(bullet)
 
     def draw(self, screen):
-        """ Rita ut spelaren på skärmen. """
+        """Rita ut spelaren på skärmen."""
         # Rita kanontornet
         # Här utnyttjar vi att pygame.draw.circle kan rita kvadranter av cirklar
         pygame.draw.circle(
@@ -118,13 +116,12 @@ class Player:
             bullet.draw(screen)
 
     def get_rect(self):
-        """ Returnerar spelarens hit box """
+        """Returnerar spelarens hit box"""
         return pygame.Rect(
             self.position - (self.size, self.size), (self.size * 2, self.size * 2)
         )
 
     def check_collisions(self, candies):
-        """
-        Kontrollerar om spelaren kolliderar med andra objekt
-        och sköter logiken för vad som händer vid kollisioner
-        """
+        """Kontrollerar om spelaren kolliderar med andra objekt
+        och sköter logiken för vad som händer vid kollisioner."""
+ß

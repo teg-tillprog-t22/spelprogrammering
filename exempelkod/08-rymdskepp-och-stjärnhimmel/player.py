@@ -3,9 +3,9 @@ from enum import Enum
 from starfield import StarField
 
 class Bullet:
-    '''
+    """
     Representerar ett skott
-    '''
+    """
     
     class State(Enum):
         ALIVE = 1
@@ -19,9 +19,9 @@ class Bullet:
         self.size = size
 
     def update(self):
-        '''
+        """
         Uppdatera skottets position
-        '''
+        """
         # Flytta skottet
         self.position += self.velocity
         # Kolla om skottet är utanför skärmen
@@ -29,21 +29,21 @@ class Bullet:
             self.die()  
 
     def die(self):
-        '''
+        """
         "Dödar" skottet
-        '''
+        """
         self.state = Bullet.State.DEAD
 
     def is_alive(self):
-        '''
+        """
         False om skottet ska tas bort, annars True
-        '''
+        """
         return self.state == Bullet.State.ALIVE
 
     def draw(self, screen):
-        '''
+        """
         Rita ut skottet på skärmen
-        '''
+        """
         pygame.draw.circle(screen, "green", self.position, self.size)
 
 
@@ -131,9 +131,9 @@ class Player:
         self.bullets = [bullet for bullet in self.bullets if bullet.is_alive()]
 
     def shoot(self):
-        '''
+        """
         Skjut ett skott
-        '''
+        """
         now = pygame.time.get_ticks()
         # Kontrollera att det har gått tillräckligt lång tid sedan förra skottet
         if now - self.last_shot > self.fire_delay:

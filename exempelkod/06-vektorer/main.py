@@ -23,10 +23,10 @@ def create_random_candy():
     return candy
 
 def main():
-    '''
+    """
     Spelets huvudfunktion.
     Motsvarar en spelomgång i vårt spel.
-    '''
+    """
 
     # Intialisera pygame och font-modulen
     pygame.init()

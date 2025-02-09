@@ -12,14 +12,14 @@ FPS = 60
 # KLASSER
 
 class Player:
-    '''
+    """
     Representerar spelaren
-    '''
+    """
 
     def __init__(self, x=100, y=100):
-        '''
+        """
         Initialisera spelarens attribut med startvärden 
-        '''
+        """
         self.x = x
         self.y = y
         self.size = 20      # Storlek i pixlar
@@ -28,10 +28,10 @@ class Player:
         self.points = 0
 
     def update(self, keys):
-        '''
+        """
         Uppdatera spelarens position och tillstånd
         Reagera på knapptryckningar
-        '''
+        """
         # Piltangenterna används för att förändra spelarens
         # riktining med 1/100 varv
         if keys[pygame.K_LEFT]:
@@ -60,9 +60,9 @@ class Player:
             self.direction = -self.direction
 
     def draw(self, screen):
-        '''
+        """
         Rita ut spelaren på skärmen.
-        '''
+        """
         now = pygame.time.get_ticks()
         # Rita spelarens kropp som en cirkel
         pygame.draw.circle(screen, "yellow", (self.x, self.y), self.size)
@@ -73,42 +73,42 @@ class Player:
         pygame.draw.line(screen, "black", (self.x, self.y), (x1,y1), 2)
 
     def get_rect(self):
-        '''Returnerar spelarens hit box'''
+        """Returnerar spelarens hit box"""
         return pygame.Rect(
             self.x-self.size, self.y-self.size, self.size*2, self.size*2)
 
     def check_collisions(self, candies):
-        '''
+        """
         Kontrollerar om spelaren kolliderar med andra objekt
         och sköter logiken för vad som händer vid kollisioner
-        '''
+        """
         for candy in candies:
             if candy.is_active() and self.get_rect().colliderect(candy.get_rect()):
                 candy.die()
                 self.points += 100
 
 class Candy:
-    '''
+    """
     Representerar en ätbar belöning i spelet
-    '''
+    """
     class State(Enum):
-        '''
+        """
         Anger tillståndet för en godis (aktiv, döende eller död)
-        '''
+        """
         
         ACTIVE = 1
-        '''Godisen är aktiv i spelet och går att äta'''
+        """Godisen är aktiv i spelet och går att äta"""
         
         DYING = 2
-        '''Godisen håller på att dö (animeras)'''
+        """Godisen håller på att dö (animeras)"""
         
         DEAD = 3
-        '''Godisen är död och väntar på att bli bortstädad'''
+        """Godisen är död och väntar på att bli bortstädad"""
 
     def __init__(self, x, y, color, size, lifetime):
-        '''
+        """
         Sätt startvärden för godisets attribut
-        '''
+        """
         self.x = x
         self.y = y
         self.color = color
@@ -117,10 +117,10 @@ class Candy:
         self.state = Candy.State.ACTIVE
 
     def update(self):
-        '''
+        """
         Uppdaterar godisets position och tillstånd
         Den ligger mest still som godisar brukar
-        '''
+        """
         now = pygame.time.get_ticks()
 
         # Godiset agerar olika beroende på tillstånd
@@ -139,15 +139,15 @@ class Candy:
                 pass
 
     def get_rect(self):
-        '''
+        """
         Returnerar godisets hit box
-        '''
+        """
         return pygame.Rect(self.x-self.size, self.y-self.size, self.size*2, self.size*2)
 
     def die(self):
-        '''
+        """
         Påbörjar godisets dödsprocess (animering vid uppäten)
-        '''
+        """
         # Ändra state till DYING
         self.state = Candy.State.DYING
         now = pygame.time.get_ticks()
@@ -155,21 +155,21 @@ class Candy:
         self.death_time = now
 
     def is_active(self):
-        '''
+        """
         Metod som anger att godiset är aktivt och kan ätas
-        '''
+        """
         return self.state==Candy.State.ACTIVE
     
     def is_alive(self):
-        '''
+        """
         Metod som anger att godiset är levande och inte ska städas bort
-        '''
+        """
         return self.state!=Candy.State.DEAD
 
     def draw(self, screen):
-        '''
+        """
         Rita godiset på skärmen.
-        '''
+        """
         now = pygame.time.get_ticks()
 
         # Beroende på state så ritas godiset ut på olika sätt
@@ -212,10 +212,10 @@ def create_random_candy():
     return candy
 
 def main():
-    '''
+    """
     Spelets huvudfunktion.
     Motsvarar en spelomgång i vårt spel.
-    '''
+    """
 
     # Intialisera pygame och font-modulen
     pygame.init()
