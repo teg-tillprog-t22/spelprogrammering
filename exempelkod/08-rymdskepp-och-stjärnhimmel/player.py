@@ -106,7 +106,11 @@ class Player:
         Uppdatera spelarens position och tillstånd
         Reagera på knapptryckningar
         """
-        # Kontroll av spelarens rörelse
+        # Börja med avstängd brännare
+        self.burner = False
+        
+        # Kontroll av knapptryckningar
+        # för rörelse och skott
         if keys[pygame.K_LEFT]:
             self.angle -= Player.ANGULAR_SPEED
         if keys[pygame.K_RIGHT]:
