@@ -1,4 +1,5 @@
 import pygame
+from enemy import Enemy
 
 # KONSTANTER
 
@@ -31,6 +32,7 @@ def main():
 
     # Initialisera spelvärlden
     bounds = screen.get_rect()
+    enemies = [Enemy(pygame.Vector2(x, 100), bounds) for x in range(40,WIDTH-40,40)]
     
     running = True
     while running:
@@ -44,6 +46,8 @@ def main():
                 running = False
 
         # Uppdatera spelvärlden/logiken
+        for enemy in enemies:
+            enemy.update()
 
         # - Rörelser
         keys = pygame.key.get_pressed()
@@ -51,11 +55,14 @@ def main():
         # - Kollisioner
 
         # - Städa upp döda objekt
+        enemies = [enemy for enemy in enemies if enemy.is_alive]
 
         # - Skapa nya objekt
 
         # Rita ut spelvärlden
         screen.fill("black")
+        for enemy in enemies:
+            enemy.draw(screen)
 
         # Flippa skärmen
         pygame.display.flip()
