@@ -54,8 +54,8 @@ def main():
 
         # - Kollisioner
 
-        # - Städa upp döda objekt
-        enemies = [enemy for enemy in enemies if enemy.is_alive]
+        # - Städa upp döda objekt 
+        enemies = [enemy for enemy in enemies if enemy.is_alive()]
 
         # - Skapa nya objekt
 
