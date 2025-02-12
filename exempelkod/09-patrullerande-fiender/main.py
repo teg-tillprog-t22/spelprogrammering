@@ -1,7 +1,6 @@
 import pygame
 from enemy import Enemy
 from player import Player
-from random import randint
 
 # KONSTANTER
 
@@ -30,16 +29,13 @@ def main():
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     clock = pygame.time.Clock()
 
-    # Välj en standardfont
-    font = pygame.font.Font(None, 36)
-
     # Initialisera spelvärlden
     bounds = screen.get_rect()
     player = Player(bounds)
-    enemies = [
-        Enemy(bounds, (20, 100), (1, 0)),       # en fiende som börjar åt vänster och rör sig åt höger
-        Enemy(bounds, (780, 200), (-1, 0))      # en fiende som börjar åt höger och rör sig åt vänster
-        ]
+    # Skapa en lista med fiender
+    # Vi skapar två fiender som rör sig åt varsitt håll på olika höjder
+    # En fiende skapas med området fienden får röra sig på, dess startposition och hastighet
+    enemies = [Enemy(bounds, (20, 100), (1, 0)), Enemy(bounds, (780, 200), (-1, 0))]
 
     running = True
     while running:

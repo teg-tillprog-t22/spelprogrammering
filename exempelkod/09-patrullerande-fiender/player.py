@@ -3,6 +3,9 @@ from enum import Enum
 
 class Player:
     """Representerar spelaren."""
+    # Den här spelaren gör för närvarande ingenting utan placeras bara i mitten av skärmen
+    # Den innehåller i övrigt bara vår standardstruktur för klasser med spelobjekt
+    # såsom init(), update(), draw() och get_rect()
 
     def __init__(self, bounds):
         """Skapa en spelare."""
