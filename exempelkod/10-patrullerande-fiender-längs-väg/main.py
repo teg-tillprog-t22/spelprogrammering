@@ -32,7 +32,10 @@ def main():
 
     # Initialisera spelvärlden
     bounds = screen.get_rect()
-    enemies = [Enemy(pygame.Vector2(x, 100), bounds) for x in range(40,WIDTH-40,40)]
+    # Skapa en lista med fiender
+    # Vi skapar en fiende var 40 pixlar från 40 till 760 på x-axeln
+    # (Alla kommer att röra sig längs den path som är definierad i Enemy-klassen)
+    enemies = [Enemy(bounds, pygame.Vector2(x, 100)) for x in range(40,WIDTH-40,40)]
     
     running = True
     while running:
