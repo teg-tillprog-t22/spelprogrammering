@@ -18,3 +18,5 @@ I mapparna med exempelkod finns det ytterligare skrivna anteckningar/genomgånga
 6. [Vektorer och moduluppdelning](exempelkod/06-vektorer/README.md)
 7. *(inte gått igenom än)* [Kanoner och skott](exempelkod/07-kanoner-och-skott/README.md)
 8. **Fördjupning:** [Rymdskepp och stjärnhimmel](exempelkod/08-rymdskepp-och-stjärnhimmel/README.md)
+9. [Patrullerande fiender](exempelkod/09-patrullerande-fiender/README.md)
+10. **Fördjupning:** [Patrullerande fiender längs väg](exempelkod/10-patrullerande-fiender-längs-väg/README.md)
