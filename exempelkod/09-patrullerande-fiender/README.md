@@ -2,7 +2,7 @@
 
 [⬅️ Gå tillbaka till startsidan](../../README.md)
 
-👾 Gå till koden: [main.py](main.py) | [enemy.py](enemy.py) | [main.py](enemy.py)
+👾 Gå till koden: [main.py](main.py) | [enemy.py](enemy.py) | [player.py](player.py)
 
 ## Patrullerande fiender
 

@@ -24,11 +24,14 @@ class Enemy:
         """
         Uppdatera fiendens position och rörelse
         """
-        # Flytta bara spelaren om den är aktiv (dvs vid liv eftersom det bara finns två states)
-        if self.is_alive():
+        # Flytta bara fienden om den är aktiv
+        # (dvs "vid liv" eftersom det bara finns två states)
+        if self.state == Enemy.State.ALIVE:
             # Uppdatera positionen
             self.position += self.velocity
             # Kolla om spelaren är utanför skärmen
+            # Se https://www.pygame.org/docs/ref/rect.html för info om Rect-objektet
+            # och bra funktioner som t ex contains()
             if not self.bounds.contains(self.get_rect()):
                 # Om spelaren är utanför skärmen, flytta tillbaka den och byt riktning
                 self.velocity = -self.velocity
@@ -50,6 +53,6 @@ class Enemy:
         """
         Rita ut fienden på skärmen
         """
-        if self.is_alive():
+        if self.state == Enemy.State.ALIVE:
             pygame.draw.circle(screen, self.color, self.position, self.size)
 
