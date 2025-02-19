@@ -15,8 +15,11 @@ class Bullet:
     def update(self):
         """Uppdatera skottets position."""
         self.position += self.velocity
-        if not self.bounds.collidepoint(self.position):
+        if not self.bounds.contains(self.get_rect()):
             self.die()
+
+    def get_rect(self):
+        return pygame.Rect(self.position.x-self.size, self.position.y-self.size, 2*self.size, 2*self.size)
 
     def die(self):
         """Döda skottet."""
@@ -81,7 +84,7 @@ class Player:
         if now - self.last_shot > self.fire_delay:
             self.last_shot = now
             # Skottets position är spelarens position + kanonens längd
-            # from_polar skapar en vektor utifrån en vinkel och en längd
+            # Vector2.from_polar skapar en vektor utifrån en vinkel och en längd
             # https://www.pygame.org/docs/ref/math.html#pygame.math.Vector2.from_polar
             bullet_position = self.position + pygame.Vector2.from_polar(
                 (self.cannon_size, self.angle)
