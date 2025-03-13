@@ -31,8 +31,7 @@ Skriv ett grundläggande Pygame-spel genom att implementera varje del i följand
 ---
 
 #### **Del 4: Anropa huvudfunktionen**
-- Lägg till kod som anropar huvudfunktionen
-- Använd `if __name__ == "__main__"` för att följa pythonstandard.
+- Lägg till kod som anropar huvudfunktionen på lämplig plats i ditt program 
 
 ---
 
