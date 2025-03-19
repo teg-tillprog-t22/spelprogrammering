@@ -390,18 +390,6 @@ Här är tio nya uppgifter med fokus på **teorifrågor och felsökning i begrä
 
 ---
 
-### **Uppgift 21: Vad gör `pygame.display.flip()` och `pygame.display.update()`?**
-1. Vad är skillnaden mellan `pygame.display.flip()` och `pygame.display.update()`?
-2. När är det bättre att använda `update()` istället för `flip()`?
-
----
-
-#### **Lösning:**
-- `pygame.display.flip()` uppdaterar hela skärmen.
-- `pygame.display.update()` kan uppdatera en specifik del av skärmen, vilket kan vara mer effektivt om bara vissa objekt förändras.
-
----
-
 ### **Uppgift 22: Varför händer inget?**
 Vad är felet i följande kod? Förklara och rätta till det.
 
