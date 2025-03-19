@@ -329,6 +329,7 @@ class Enemy:
             self.direction *= -1  # Byt riktning
 ```
 
+---
 
 ### Uppgift 18: Räkna antal godisar spelaren samlat
 a.) Hur kan vi hålla koll på hur många godisar en spelare har samlat in?
@@ -373,87 +374,18 @@ class Enemy:
             self.position += direction * self.speed
 ```
 
+---
+
 ### Uppgift 20: Styr hastigheten med tangenter**
 
 a.) Hur kan vi ändra spelarens hastighet genom att hålla nere en knapp?
 
 b.) Lägg till funktionalitet i en spelares `update()` som gör att spelaren rör sig snabbare om `pygame.K_LSHIFT` hålls ner.
 
-
-
-
-
-
-
-
-Här är tio nya uppgifter med fokus på **teorifrågor och felsökning i begränsade kodexempel**:
-
 ---
 
-### **Uppgift 22: Varför händer inget?**
-Vad är felet i följande kod? Förklara och rätta till det.
+### Uppgift 24: Vad händer om vi tar bort `self`?
 
-```python
-import pygame
-
-pygame.init()
-screen = pygame.display.set_mode((400, 300))
-
-while True:
-    pygame.event.get()
-    screen.fill((255, 255, 255))
-```
-
----
-
-#### **Lösning:**
-- Programmet fryser eftersom det saknar **en avslutningsmekanism** och **uppdatering av skärmen**.
-- Rättad version:
-
-```python
-import pygame
-
-pygame.init()
-screen = pygame.display.set_mode((400, 300))
-running = True
-
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-    screen.fill((255, 255, 255))
-    pygame.display.flip()
-```
-
----
-
-### **Uppgift 23: Vad gör denna kod?**
-Vad kommer följande kod att skriva ut? Förklara varför.
-
-```python
-class GameObject:
-    def __init__(self, x):
-        self.x = x
-
-obj1 = GameObject(10)
-obj2 = obj1
-obj2.x = 20
-
-print(obj1.x)
-```
-
----
-
-#### **Lösning:**
-```
-20
-```
-- `obj2 = obj1` gör att **båda variablerna refererar till samma objekt**.
-- Ändringar i `obj2` påverkar även `obj1`.
-
----
-
-### **Uppgift 24: Vad händer om vi tar bort `self`?**
 Vad är felet i följande kod?
 
 ```python
@@ -465,9 +397,9 @@ class Player:
 
 ---
 
-#### **Lösning:**
-- Konstruktorn saknar **`self`** och lagrar inte värdena korrekt.
-- Rättad version:
+#### Lösning:
+
+- Konstruktorn saknar **`self`** och lagrar inte värdena som attribut i klassen.
 
 ```python
 class Player:
@@ -476,40 +408,10 @@ class Player:
         self.y = y
 ```
 
----
-
-### **Uppgift 25: Vad gör denna kod?**
-Vad skrivs ut? Förklara.
-
-```python
-x = 5
-
-def change_x():
-    x = x + 1
-
-change_x()
-```
 
 ---
 
-#### **Lösning:**
-- Felet: `x = x + 1` försöker ändra `x`, men Python ser det som en **lokal variabel** och den är inte definierad innan den används.
-- Rättad version:
-
-```python
-x = 5
-
-def change_x():
-    global x
-    x = x + 1
-
-change_x()
-print(x)  # 6
-```
-
----
-
-### **Uppgift 26: Kollision fungerar inte – varför?**
+### Uppgift 26: Kollision fungerar inte – varför?
 Vad är felet i följande kod?
 
 ```python
@@ -524,9 +426,9 @@ class Player:
 
 ---
 
-#### **Lösning:**
+#### Lösning:
+
 - `self.rect == enemy.rect` kontrollerar om **rektanglarna är exakt lika**, vilket är fel.
-- Rätt version:
 
 ```python
 def check_collision(self, enemy):
@@ -537,32 +439,7 @@ def check_collision(self, enemy):
 
 ---
 
-### **Uppgift 27: Oändlig loop – varför?**
-Vad är felet i följande kod?
-
-```python
-while True:
-    event = pygame.event.wait()
-    if event.type == pygame.QUIT:
-        break
-```
-
----
-
-#### **Lösning:**
-- `pygame.event.wait()` returnerar **bara ett event** i taget och kan fastna om inga event händer.
-- Rättad version:
-
-```python
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            break
-```
-
----
-
-### **Uppgift 28: Fienden rör sig inte – varför?**
+### Uppgift 28: Fienden rör sig inte – varför?
 Vad är felet i följande kod?
 
 ```python
@@ -577,7 +454,7 @@ class Enemy:
 
 ---
 
-#### **Lösning:**
+#### Lösning:
 - Felet är att `position` inte refererar till `self.position`, så det skapas en **lokal variabel** istället för att ändra objektets position.
 - Rättad version:
 
@@ -589,7 +466,7 @@ def update(self):
 ---
 
 
-### Uppgift: Skärminställningar
+### Uppgift 29: Skärminställningar
 
 a.) Vad gör `pygame.display.set_mode((800, 600))`?
 
@@ -607,7 +484,7 @@ d.) Vad returnerar de tre funktionerna?
 
 ---
 
-### Uppgift: Vad händer om vi glömmer att flippa skärmen
+### Uppgift 34: Vad händer om vi glömmer att flippa skärmen
 
 a.) Varför måste vi anropa `pygame.display.flip()` varje varv i loopen?
 
@@ -615,7 +492,7 @@ b.) Vad händer om vi inte gör det?
 
 ---
 
-### Uppgift: Hur fungerar det när vi kollar knapptryckningar
+### Uppgift 35: Hur fungerar det när vi kollar knapptryckningar
 
 a.) Vad returnerar `pygame.key.get_pressed()`?
 
@@ -623,7 +500,7 @@ b.) Vad är skillnaden mellan att undersöka om en knapp tryckts ned genom att a
 
 ---
 
-### Uppgift: Vad är en hitbox?
+### Uppgift 36: Vad är en hitbox?
 
 1. Vad menas med en **hitbox** i spelprogrammering?
 
@@ -631,7 +508,7 @@ b.) Vad är skillnaden mellan att undersöka om en knapp tryckts ned genom att a
 
 ---
 
-### Uppgift: Varför använda klasser i Pygame?
+### Uppgift 37: Varför använda klasser i Pygame?
 
 a.) Vilka fördelar finns med att använda klasser i spelprogrammering?
 
@@ -639,7 +516,7 @@ b.) Hur kan klasser hjälpa till att organisera spelets kod?
 
 ---
 
-### Uppgift: Vad innebär begreppet "modularitet" i ett spelprojekt?
+### Uppgift 38: Vad innebär begreppet "modularitet" i ett spelprojekt?
 
 1. Hur kan vi uppnå modularitet i ett Pygame-spel?
 
@@ -647,7 +524,7 @@ b.) Hur kan klasser hjälpa till att organisera spelets kod?
 
 ---
 
-### Uppgift: Varför använda vektorer istället för enkel geometri?
+### Uppgift 39: Varför använda vektorer istället för enkel geometri?
 
 a.) Vad är skillnaden mellan att räkna rörelser med `x, y`-koordinater och att använda `pygame.Vector2()`?
 
@@ -655,7 +532,7 @@ b.) Nämn en situation där vektorer gör det enklare att implementera spelröre
 
 ---
 
-### Uppgift: Hur fungerar kollisionshantering i Pygame?
+### Uppgift 40: Hur fungerar kollisionshantering i Pygame?
 
 a.) Vilka olika sätt kan vi använda för att upptäcka kollisioner mellan objekt?
 
@@ -663,7 +540,7 @@ b.) Hur fungerar `colliderect()`, `contains()` och `collidepoint()`?
 
 ---
 
-### Uppgift: Vad menas med att en fiende "patrullerar"?
+### Uppgift 41: Vad menas med att en fiende "patrullerar"?
 
 a.) Vad betyder det att en fiende patrullerar, jagar respektive flyr?
 
@@ -671,7 +548,7 @@ b.) Beskriv med ord hur du skulle implementera de olika varianterna i en `Enemy`
 
 ---
 
-### Uppgift: Vad är en spelloop och varför behövs den?
+### Uppgift 42: Vad är en spelloop och varför behövs den?
 
 a.) Vad är en **spelloop** och varför behövs den i ett Pygame-spel?
 
@@ -679,8 +556,10 @@ b.) Vilka delar ingår vanligtvis i en spelloop och i vilken ordning bör de exe
 
 ---
 
-### Uppgift: Hur hanteras kollisioner mellan spelaren och fiender?
+### Uppgift 43: Hur hanteras kollisioner mellan spelaren och fiender?
 
 a.) Vem ansvarar lämpligen för att kontrollera kollisioner i ett mindre spel – huvudloopen eller enskilda objekt? Motivera ditt svar.
 
 b.) Vad kan hända om vi kontrollerar kollisioner på fel plats i programmet?
+
+---
