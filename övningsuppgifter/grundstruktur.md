@@ -78,13 +78,13 @@ Skriv ett grundläggande Pygame-spel genom att implementera varje del i följand
 
 ---
 
-#### **Del 11: Lägg till hitboxar
+#### **Del 11: Lägg till hitboxar**
 - I både godisklassen och spelarklassen:
     - Lägg till en metod `get_rect()` eller ett attribut `rect` som innehåller objektets hitbox.
 
 --- 
 
-#### **Del 11: Lägg till kommentarer i huvudloopen
+#### **Del 12: Lägg till kommentarer i huvudloopen**
 
 - Lägg till kommentarer i huvudloopen som beskriver var:
   - Kollisioner kontrolleras
