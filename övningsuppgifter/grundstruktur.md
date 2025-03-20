@@ -17,7 +17,6 @@ Skriv ett grundläggande Pygame-spel genom att implementera varje del i följand
   - Initierar Pygame.
   - Skapar en skärm med angiven storlek.
   - Skapar en klocka för att styra uppdateringsfrekvensen.
-  - Returnerar skärmen och klockan.
 
 ---
 
