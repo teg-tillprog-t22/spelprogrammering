@@ -7,7 +7,8 @@ class Player(pygame.sprite.Sprite):
         self.y = y
         self.speed = 8
         self.image = pygame.image.load("player.png")
-        self.rect = self.image.get_rect(topleft = (x,y))
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x,y)
 
     def update(self, keys):
         dx = 0
@@ -23,8 +24,6 @@ class Player(pygame.sprite.Sprite):
 
         if dx != 0 or dy != 0:
             length = (dx ** 2 + dy ** 2) ** 0.5
-            self.x += dx / length
-            self.y += dy / length
+            self.x += dx / length * self.speed
+            self.y += dy / length * self.speed
             self.rect.topleft = (self.x, self.y)
-            
-    
