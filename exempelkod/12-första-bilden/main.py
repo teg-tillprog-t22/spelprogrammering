@@ -37,11 +37,14 @@ def main():
         # Uppdatera spelvärlden/logiken
         keys = pygame.key.get_pressed()
         player.update(keys)
-        for candy in candies:
+        # Vi har inga godisar än, men OM vi hade haft det
+        # skulle vi uppdatera dem här
+        for candy in candies:   
             candy.update()
 
         # Rita ut spelvärlden
         screen.fill("black")
+        # Fortfarande inga godisar, men här skulle vi ha ritat ut dem
         for candy in candies:
             candy.draw(screen)
         player.draw(screen)

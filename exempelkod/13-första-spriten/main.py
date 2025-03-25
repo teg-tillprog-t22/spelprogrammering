@@ -21,9 +21,15 @@ def main():
 
     # Initialisera spelvärlden
     player = Player(WIDTH // 2, HEIGHT // 2)
+
+    # Vi stoppar in spelaren i en spritegrupp
+    # för att dra nytta av funktionalitet som finns
+    # inbyggd i pygame
     players = pygame.sprite.Group()
     players.add(player) 
 
+    # Vi gör samma sak med godisarna,
+    # även om vi inte har några än
     candies = pygame.sprite.Group()
 
     running = True
@@ -40,10 +46,13 @@ def main():
         # Uppdatera spelvärlden/logiken
         keys = pygame.key.get_pressed()
         players.update(keys)
+        # Vi har inga godisar än, men OM vi hade haft det
+        # skulle vi uppdatera dem här
         candies.update()
 
         # Rita ut spelvärlden
         screen.fill("black")
+        # Fortfarande inga godisar, men här skulle vi ha ritat ut dem
         candies.draw(screen)
         players.draw(screen)
 
