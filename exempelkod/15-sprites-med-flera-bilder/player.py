@@ -16,10 +16,18 @@ class Player(pygame.sprite.Sprite): # spelarklassen ärver av klassen Sprite fr�
         self.dy = 0
         self.speed = 5
         
-        self.image = pygame.image.load("player.png")
+        # Ladda från ett spritesheet
+        image = pygame.image.load("boy.png")
+        self.img_left = image.subsurface((0,0,64,64))
+        self.img_up = image.subsurface((64,0,64,64))
+        self.img_down = image.subsurface((128,0,64,64))
+        self.img_right = image.subsurface((196,0,64,64))
+        
+        # Välj valfri bild att starta med för att initialisera attributet
+        self.image = self.img_up
 
         """HÄR ÄR DET NYTT"""
-        self.rect = self.image.get_rect(topleft = (x,y)) # ett attribut som är hitbox
+        self.rect = image.get_rect(topleft=(x,y)) # ett attribut som är hitbox
         # Vi utgår här ifrån bilden och talar om att vi vill ha top-left som utgångspunkt (går att ha center istället om man vill)
 
 
@@ -29,18 +37,17 @@ class Player(pygame.sprite.Sprite): # spelarklassen ärver av klassen Sprite fr�
 
         if keys[pygame.K_LEFT]:
             self.dx = -1
-        if keys[pygame.K_RIGHT]:
+            self.image = self.img_left
+        elif keys[pygame.K_RIGHT]:
             self.dx = 1
-        if keys[pygame.K_UP]:
+            self.image = self.img_right
+        elif keys[pygame.K_UP]:
             self.dy = -1
-        if keys[pygame.K_DOWN]:
+            self.image = self.img_up
+        elif keys[pygame.K_DOWN]:
             self.dy = 1
-            
-        if self.dx != 0 or self.dy != 0:
-            length = (self.dx ** 2 + self.dy ** 2) ** 0.5
-            self.dx = self.dx/length
-            self.dy = self.dy/length
-            
+            self.image = self.img_down
+          
         self.x += self.dx * self.speed
         self.y += self.dy * self.speed
 
