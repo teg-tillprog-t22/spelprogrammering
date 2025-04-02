@@ -72,7 +72,7 @@ def main():
         # pygame.sprite.Group automatiskt
 
         # Rita ut spelvärlden
-        screen.fill("black")
+        screen.fill("white")
         candies.draw(screen)
         players.draw(screen)
 
