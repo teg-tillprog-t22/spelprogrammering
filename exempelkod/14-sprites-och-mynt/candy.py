@@ -1,29 +1,31 @@
 import pygame
 import random
 
-COIN_SIZE = 50
+# Definiera bilden som en
 COIN_IMAGE = pygame.image.load("coin.png")
-COIN_IMAGE = pygame.transform.scale(COIN_IMAGE, (COIN_SIZE, COIN_SIZE))
 
 class Candy(pygame.sprite.Sprite):
-    def __init__(self, area: pygame.Rect):
+    def __init__(self, area):
         super().__init__()
+        # Area representerar skärmens storlek
         self.area = area
-        self.x = random.randint(area.left, area.right - COIN_SIZE)
-        self.y = area.top - COIN_SIZE
-        self.speed = random.randint(1,5)
         self.image = COIN_IMAGE
         self.rect = self.image.get_rect()
-        self.rect.topleft = (self.x, self.y)
+        self.speed = 3
+        # Slumpa placeringen i x-led
+        x = random.randint(area.left, area.right - self.rect.width)
+        # Börja precis ovanför skärmens topp
+        y = area.top - self.rect.height
+        # Sätt positionen på rektangeln själv
+        self.rect.topleft = (x, y)
 
     def update(self):
-        self.y += self.speed
-        if self.y > self.area.bottom:
+        # Vi ändrar y-värdet direkt i self.rect
+        self.rect.y += self.speed
+
+        if self.rect.y > self.area.bottom:
             # Om godiset hamnar utanför skärmen
             # så markerar vi det för borttagning
             # ur alla spritegrupper
             self.kill()
-
-        self.rect.topleft = (self.x, self.y)
-
 
