@@ -4,7 +4,8 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, x=100, y=100):
         super().__init__()
         self.speed = 8
-        self.image = pygame.image.load("player.png")
+        image = pygame.image.load("boy.png")
+        self.image = image.subsurface((0,0,64,64))
         self.rect = self.image.get_rect()
         self.rect.topleft = (x,y)
 
