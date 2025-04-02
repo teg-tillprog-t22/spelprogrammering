@@ -12,20 +12,16 @@ class Candy(pygame.sprite.Sprite):
         self.image = COIN_IMAGE
         self.rect = self.image.get_rect()
         self.speed = 3
-        # Slumpa placeringen i x-led
+        # Slumpa placeringen av myntet
         x = random.randint(area.left, area.right - self.rect.width)
-        # Börja precis ovanför skärmens topp
-        y = area.top - self.rect.height
+        y = random.randint(area.top, area.bottom - self.rect.height)
         # Sätt positionen på rektangeln själv
         self.rect.topleft = (x, y)
+        self.created_at = pygame.time.get_ticks()
 
     def update(self):
-        # Vi ändrar y-värdet direkt i self.rect
-        self.rect.y += self.speed
-
-        if self.rect.y > self.area.bottom:
-            # Om godiset hamnar utanför skärmen
-            # så markerar vi det för borttagning
-            # ur alla spritegrupper
+        now = pygame.time.get_ticks()
+        # Godiset försvinner genom att döda sig själv efter 5 sekunder
+        if now - self.created_at > 2000:
             self.kill()
 
