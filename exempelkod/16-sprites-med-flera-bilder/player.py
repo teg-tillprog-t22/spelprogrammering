@@ -1,16 +1,31 @@
 import pygame
 
+# Inför konstanter för riktningarna
+LEFT = 0
+DOWN = 1
+UP = 2
+RIGHT = 3
+
 class Player(pygame.sprite.Sprite):
     def __init__(self, x=100, y=100):
         super().__init__()
-        self.speed = 8
+        self.speed = 4
         image = pygame.image.load("boy.png")
-        self.image_left = image.subsurface((0,0,64,64))
-        self.image_up = image.subsurface((64,0,64,64))
-        self.image_down = image.subsurface((128,0,64,64))
-        self.image_right = image.subsurface((196,0,64,64))
+        # Vi använder listor av listor för att göra
+        # koden smidig
+        self.images = []
+        # Vi laddar in bilder för alla fyra riktningar
+        for column_idx in range(0,4):
+            # Lägg till en lista för bilderna i denna rimtning
+            direction = []
+            self.images.append(direction)
+            # För varje riktning finns fyra bilder
+            for row_idx in range(0,4):
+                subimage = image.subsurface((column_idx*64,row_idx*64,64,64))
+                direction.append(subimage)
         # Börja med att titta åt vänster
-        self.image = self.image_left
+        self.direction = LEFT
+        self.image = self.images[self.direction][0]
         self.rect = self.image.get_rect()
         self.rect.topleft = (x,y)
 
@@ -23,16 +38,16 @@ class Player(pygame.sprite.Sprite):
         # dx eller dy
         if keys[pygame.K_LEFT]:
             dx = -1
-            self.image = self.image_left
+            self.direction = LEFT
         elif keys[pygame.K_RIGHT]:
             dx = 1
-            self.image = self.image_right
+            self.direction = RIGHT
         elif keys[pygame.K_UP]:
             dy = -1
-            self.image = self.image_up
+            self.direction = DOWN
         elif keys[pygame.K_DOWN]:
             dy = 1
-            self.image = self.image_down
+            self.direction = UP
 
         if dx != 0 or dy != 0:
             # Nu behövs alltså inte skalningen längre,
@@ -40,3 +55,13 @@ class Player(pygame.sprite.Sprite):
             length = (dx ** 2 + dy ** 2) ** 0.5
             self.rect.x += dx / length * self.speed
             self.rect.y += dy / length * self.speed
+
+            # Ändra bara bild när spelaren rör sig
+            # för förhindra att bilden skall animeras när
+            # spelaren står still
+            now = pygame.time.get_ticks()
+            # Använd modulo-operatorn för att byta bild till nästa
+            # med jämna mellanrum (150 ms)
+            index = (now//150) % len(self.images[self.direction])
+            # Välj bild baserat på index
+            self.image = self.images[self.direction][index] 
