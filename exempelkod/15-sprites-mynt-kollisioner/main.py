@@ -37,6 +37,9 @@ def main():
     # Skapa en tom spritegrupp för godisar
     candies = pygame.sprite.Group()
 
+    # Skapa en poängräknare
+    score = 0
+
     running = True
     while running:
         # Flytta fram frame/tid
@@ -58,6 +61,11 @@ def main():
         if random.randint(1, FPS*2) == 1:
             candy = Candy(area)
             candies.add(candy)
+
+        # Kontrollera kollisioner
+        if pygame.sprite.spritecollide(player, candies, True):
+            score += 100
+            print(f"Totalpoäng: {score}")
 
         # OBS! Vi behöver inte städa upp
         # döda godisar här, för det gör
