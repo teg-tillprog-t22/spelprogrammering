@@ -2,7 +2,7 @@ import pygame
 import random
 
 # Definiera bilden som en
-COIN_IMAGE = pygame.image.load("coin.png")
+COIN_IMAGE = pygame.transform.smoothscale(pygame.image.load("coin.png"), (32,32))
 
 class Candy(pygame.sprite.Sprite):
     def __init__(self, area):

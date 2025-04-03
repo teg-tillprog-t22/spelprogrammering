@@ -2,6 +2,7 @@ import random
 import pygame
 from player import Player
 from candy import Candy
+from explosion import Explosion
 
 # KONSTANTER
 WIDTH = 800
@@ -37,6 +38,9 @@ def main():
     # Skapa en tom spritegrupp för godisar
     candies = pygame.sprite.Group()
 
+    # Och en för effekter som inte ska påverka spelet
+    effects = pygame.sprite.Group()
+
     # Skapa en poängräknare
     score = 0
 
@@ -55,6 +59,7 @@ def main():
         keys = pygame.key.get_pressed()
         players.update(keys)
         candies.update()
+        effects.update()
 
         # Skapa nya godisar slumpmässigt
         # ungefär varannan sekund
@@ -63,18 +68,20 @@ def main():
             candies.add(candy)
 
         # Kontrollera kollisioner
-        if pygame.sprite.spritecollide(player, candies, True):
+        sprites = pygame.sprite.spritecollide(player, candies, True)
+        for sprite in sprites:
             score += 100
             print(f"Totalpoäng: {score}")
+            effects.add(Explosion(sprite.rect.x, sprite.rect.y))
 
-        # OBS! Vi behöver inte städa upp
-        # döda godisar här, för det gör
-        # pygame.sprite.Group automatiskt
+        # OBS! Vi behöver inte städa upp sprites
+        # Det gör pygame.sprite.Group automatiskt
 
         # Rita ut spelvärlden
         screen.fill("white")
         candies.draw(screen)
         players.draw(screen)
+        effects.draw(screen)
 
         # Flippa skärmen
         pygame.display.flip()
